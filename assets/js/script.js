@@ -6,10 +6,29 @@ $(document).ready(function() {//Wait for whole document to load before running j
     }
     setInterval(setDate, 1000);//update time in real-time
     
-    //Store tasks
-    $(".saveBtn").on("click", function() {
-        console.log(this);
-    })
 
+
+
+    //time block states for past, present, and future
+    function timeBlock() {
+        var currentHour = moment().hour();
+
+        $(".time-block").each(function() {
+            //split the id of the class with time-block and parseInt in index 1 of array
+            var timeBlockHour = parseInt($(this).attr("id").split("hour")[1]);
+
+            //apply respective background colour depending on hour
+            if(timeBlockHour < currentHour) {
+                $(this).addClass("past");
+            }
+            else if (timeBlockHour === currentHour) {
+                $(this).addClass("present");
+            }
+            else {
+                $(this).addClass("future");
+            }
+        })
+    }
+    timeBlock();
 
 }); //function end
